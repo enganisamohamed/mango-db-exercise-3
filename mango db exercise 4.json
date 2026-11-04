@@ -1,0 +1,84 @@
+
+// Select database
+db = db.getSiblingDB("dugsiiye")
+
+// 1. Insert 3 students
+db.students.insertMany([
+  {
+    name: "Ahmed Ali",
+    email: "ahmed@gmail.com",
+    points: 80,
+    courses: ["MongoDB", "JavaScript"]
+  },
+  {
+    name: "Amina Hassan",
+    email: "amina@gmail.com",
+    points: 90,
+    courses: ["HTML", "CSS", "React"]
+  },
+  {
+    name: "Mohamed Omar",
+    email: "mohamed@gmail.com",
+    points: 75,
+    courses: ["Python", "MySQL"]
+  }
+])
+
+// 2. Use $set to update one student's email
+db.students.updateOne(
+  { name: "Ahmed Ali" },
+  {
+    $set: {
+      email: "ahmedali@gmail.com"
+    }
+  }
+)
+
+// 3. Use $inc to increase points
+db.students.updateOne(
+  { name: "Ahmed Ali" },
+  {
+    $inc: {
+      points: 10
+    }
+  }
+)
+
+// 4. Use $push to add a new course
+db.students.updateOne(
+  { name: "Ahmed Ali" },
+  {
+    $push: {
+      courses: "Python"
+    }
+  }
+)
+
+// 5. Use $pull to remove a course
+db.students.updateOne(
+  { name: "Ahmed Ali" },
+  {
+    $pull: {
+      courses: "JavaScript"
+    }
+  }
+)
+
+// 6. BONUS: Use $set, $inc and $push together
+db.students.updateOne(
+  { name: "Amina Hassan" },
+  {
+    $set: {
+      email: "amina.hassan@gmail.com"
+    },
+    $inc: {
+      points: 15
+    },
+    $push: {
+      courses: "MongoDB"
+    }
+  }
+)
+
+// 7. Display all students to check the results
+db.students.find()
